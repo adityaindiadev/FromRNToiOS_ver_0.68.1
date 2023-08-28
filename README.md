@@ -14,7 +14,7 @@ UIViewController *rootViewController = [UIViewController new];
 
 
 
-//------------- Main OLD Default Code Start -->
+//------------- Main OLD Default Code Start
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [self createRootViewController];
   rootViewController.view = rootView;
@@ -38,6 +38,6 @@ UIViewController *rootViewController = [UIViewController new];
     self.window.rootViewController = navigationController;
     [self.window makeKeyAndVisible];
 
-<!-- ------- Main Code Ends Here -->
+------- Main Code Ends Here
 
-<!-- //Code Written By Aditya Gupta 28 Aug 2023 ------------- -->
+//Code Written By Aditya Gupta 28 Aug 2023 -------------
