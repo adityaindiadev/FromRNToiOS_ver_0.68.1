@@ -5,18 +5,18 @@ instead of it you can directly write :-
 UIViewController *rootViewController = [UIViewController new];
 ```
 
+// ------- createRootViewController Starts 
 ```sh
 - (UIViewController *)createRootViewController
 {
   return [UIViewController new];
 }
 ```
-
- // ------- createRootViewController Ends 
-
+ //createRootViewController Ends ------- 
 
 
-//------------- Main OLD Default Code Start
+
+//------------- Main OLD Default Code Starts
 ```sh
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UIViewController *rootViewController = [self createRootViewController];
@@ -24,7 +24,7 @@ UIViewController *rootViewController = [UIViewController new];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
   ```
-// Main Old Default Code End -------------
+// Main Old Default Code Ends -------------
 
 
 //------------- Code Written By Aditya Gupta 28 Aug 2023
@@ -41,6 +41,7 @@ UIViewController *rootViewController = [UIViewController new];
     UIViewController *rootViewController = [self createRootViewController]; 
 ```
 
+------- Main Code Continue...
 ```sh
 rootViewController.view = rootView;
 UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
@@ -48,6 +49,6 @@ self.window.rootViewController = navigationController;
 [self.window makeKeyAndVisible];
 ```
 
-------- Main Code Ends Here
+Main Code Ends Here -------
 
 //Code Written By Aditya Gupta 28 Aug 2023 -------------
