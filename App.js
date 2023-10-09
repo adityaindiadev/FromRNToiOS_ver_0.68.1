@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
+import type { Node } from 'react';
 import { Button, Linking } from 'react-native';
 import {
   SafeAreaView,
@@ -18,6 +18,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import WebView from 'react-native-webview';
 
 import {
   Colors,
@@ -27,31 +28,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -59,16 +36,132 @@ const App: () => Node = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const webViewRef = React.useRef();
+
+  const isReloaded = React.useRef(false);
+
+  const setCookies = () => {
+    // Replace with your actual cookie-setting logic
+    console.log("setCookies");
+    const cookies = 'username=John Doe, pass=Aditya';
+    const script = `document.cookie = '${cookies}';`;
+    webViewRef.current.injectJavaScript(script);
+  }
+
+  const getCookies = () => {
+
+    console.log("getCookies");
+    const script = `
+      const cookies = document.cookie;
+      cookies;
+    `;
+
+    webViewRef.current.injectJavaScript(script, result => {
+      console.log('Cookies:', result);
+    });
+  }
+
+  const debugging = `
+  const consoleLog = (type, log) => window.ReactNativeWebView.postMessage(JSON.stringify({'type': 'Console', 'data': {'type': type, 'log': log}}));
+  console = {
+      log: (log) => consoleLog('log', log),
+      debug: (log) => consoleLog('debug', log),
+      info: (log) => consoleLog('info', log),
+      warn: (log) => consoleLog('warn', log),
+      error: (log) => consoleLog('error', log),
+    };
+
+    document.cookie = "mycookie=AdityaRocksSS"
+    document.cookie = "nextCookie=Mango"
+    
+    console.log('cookie_set');
+    console.log(document.cookie);
+   
+
+    
+`;
+
+  function relodeWebView() {
+
+    if (isReloaded.current) {
+
+      console.log("Already Reloaded !");
+
+      return;
+
+    }
+
+    console.log("relodeWebView Executed !");
+
+    webViewRef.current.reload();
+
+
+    isReloaded.current = true
+
+  }
+
+  const onMessage = async payload => {
+
+    console.log("onMessage executed !");
+    let dataPayload;
+    try {
+      dataPayload = JSON.parse(payload.nativeEvent.data);
+    } catch (e) { }
+    if (dataPayload) {
+      if (dataPayload.type === 'Console') {
+
+        console.info(`[Console] ${JSON.stringify(dataPayload.data)}`);
+
+        console.log("dataPayload.data", dataPayload.data);
+
+        if (dataPayload.data.log === 'cookie_set') {
+
+          relodeWebView()
+
+        }
+
+      }
+
+      else {
+      }
+    }
+  };
+
+
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Button
-      title='Move To iOS Screen !'
-      onPress={()=>{
-        Linking.openURL("fromrntoios://hi")
-      }}
+    // <SafeAreaView style={backgroundStyle}>
+    <>
+
+
+
+      <WebView
+        ref={webViewRef}
+        source={{ uri: 'https://video2gif.000webhostapp.com' }}
+        style={{
+          marginTop: 20,
+          // height: 320,
+          // width: 200
+        }}
+        // onLoadEnd={getCookies}
+        // onLoad={setCookies}
+        javaScriptEnabled={true}
+        injectedJavaScript={debugging}
+        onMessage={onMessage}
+
       />
-    </SafeAreaView>
+      <Button
+        title='Move To iOS Screen !'
+        onPress={() => {
+          // Linking.openURL("fromrntoios://hi")
+          // getCookies()
+
+          webViewRef.current.reload();
+
+        }}
+      />
+    </>
+    // </SafeAreaView>
   );
 };
 
