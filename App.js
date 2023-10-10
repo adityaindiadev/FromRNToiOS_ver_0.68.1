@@ -114,7 +114,7 @@ const App: () => Node = () => {
 
         console.log("dataPayload.data", dataPayload.data);
 
-        if (dataPayload.data.log === 'cookie_set') {
+        if (dataPayload.data.log === 'helloFromWebView') {
 
           relodeWebView()
 
@@ -155,8 +155,11 @@ const App: () => Node = () => {
         onPress={() => {
           // Linking.openURL("fromrntoios://hi")
           // getCookies()
-
-          webViewRef.current.reload();
+          const script = `document.cookie = "newKey=Apple";
+          console.log('helloFromWebView');
+          `;
+          webViewRef.current.injectJavaScript(script);
+          // webViewRef.current.reload();
 
         }}
       />
