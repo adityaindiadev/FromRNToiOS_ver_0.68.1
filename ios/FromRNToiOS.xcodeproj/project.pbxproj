@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* FromRNToiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FromRNToiOSTests.m */; };
+		04C64ADD2ADE699E005DB120 /* GetCookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C64ADC2ADE699E005DB120 /* GetCookies.swift */; };
+		04C64ADF2ADE69CD005DB120 /* GetCookies.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C64ADE2ADE69CD005DB120 /* GetCookies.m */; };
 		04DC10BD2A9885D200EAC5A0 /* main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DC10BC2A9885D200EAC5A0 /* main.storyboard */; };
 		04DC10C02A98860100EAC5A0 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DC10BF2A98860100EAC5A0 /* FirstViewController.swift */; };
 		0C80B921A6F3F58F76C31292 /* libPods-FromRNToiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-FromRNToiOS.a */; };
@@ -32,6 +34,8 @@
 		00E356EE1AD99517003FC87E /* FromRNToiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FromRNToiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* FromRNToiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FromRNToiOSTests.m; sourceTree = "<group>"; };
+		04C64ADC2ADE699E005DB120 /* GetCookies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCookies.swift; sourceTree = "<group>"; };
+		04C64ADE2ADE69CD005DB120 /* GetCookies.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCookies.m; sourceTree = "<group>"; };
 		04DC10BC2A9885D200EAC5A0 /* main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = main.storyboard; sourceTree = "<group>"; };
 		04DC10BE2A98860000EAC5A0 /* FromRNToiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FromRNToiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		04DC10BF2A98860100EAC5A0 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				04DC10BC2A9885D200EAC5A0 /* main.storyboard */,
 				04DC10BF2A98860100EAC5A0 /* FirstViewController.swift */,
+				04C64ADC2ADE699E005DB120 /* GetCookies.swift */,
+				04C64ADE2ADE69CD005DB120 /* GetCookies.m */,
 				04DC10BE2A98860000EAC5A0 /* FromRNToiOS-Bridging-Header.h */,
 			);
 			name = FromRNToiOS;
@@ -419,6 +425,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C64ADF2ADE69CD005DB120 /* GetCookies.m in Sources */,
+				04C64ADD2ADE699E005DB120 /* GetCookies.swift in Sources */,
 				04DC10C02A98860100EAC5A0 /* FirstViewController.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,

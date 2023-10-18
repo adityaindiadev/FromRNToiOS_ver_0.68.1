@@ -6,6 +6,8 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'FromRNToiOS' do
   config = use_native_modules!
+  
+  pod 'Alamofire'
 
   # Flags change depending on the env values.
   flags = get_default_flags()
