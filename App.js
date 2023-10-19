@@ -28,6 +28,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import WebViewScreen from './src/WebViewScreen';
+import LearnFlexScreen from './src/LearnFlexScreen';
 
 
 
@@ -137,172 +139,20 @@ const App: () => Node = () => {
 
 
 
-  useEffect(() => {
-
-    CookieManager.set("https://adsso.airtel.com", MSISAuth,)
-      .then((res) => {
-        console.log('CookieManager.set from MSISAuth =>', res);
-
-        CookieManager.set("https://adsso.airtel.com", MSISSignOut)
-          .then((res) => {
-            console.log('CookieManager.set from MSISSignOut =>', res);
-
-            CookieManager.set("https://adsso.airtel.com", MSISAuthenticated)
-              .then((res) => {
-                console.log('CookieManager.set from MSISAuthenticated =>', res);
-
-                CookieManager.set("https://adsso.airtel.com", MSISLoopDetectionCookie)
-                  .then((res) => {
-                    console.log('CookieManager.set from MSISLoopDetectionCookie =>', res);
-
-                    // CookieManager.set("https://adsso.airtel.com", MSISIPSelectionPersistent)
-                    //   .then((res) => {
-                    //     console.log('CookieManager.set from MSISIPSelectionPersistent =>', res);
-
-                    //     console.log(CookieManager);
-
-                    CookieManager.getAll()
-                      .then((cookies) => {
-                        console.log('CookieManager.getAll =>', cookies);
-                      });
-
-                    // });
-
-                  });
-
-              });
-
-          });
-
-      });
-
-
-
-  }, [])
-
-  function relodeWebView() {
-
-    if (isReloaded.current) {
-
-      console.log("Already Reloaded !");
-
-      return;
-
-    }
-
-    console.log("relodeWebView Executed !");
-
-    webViewRef.current.reload();
-
-
-    isReloaded.current = true
-
-  }
-
-  const onMessage = async payload => {
-
-    console.log("onMessage executed !");
-    let dataPayload;
-    try {
-      dataPayload = JSON.parse(payload.nativeEvent.data);
-    } catch (e) { }
-    if (dataPayload) {
-      if (dataPayload.type === 'Console') {
-
-        console.info(`[Console] ${JSON.stringify(dataPayload.data)}`);
-
-        console.log("dataPayload.data", dataPayload.data);
-
-        if (dataPayload.data.log === 'helloFromWebView') {
-
-          relodeWebView()
-
-        }
-
-      }
-
-      else {
-      }
-    }
-  };
 
 
 
   return (
-
     <>
 
-      {!loadWebView ?
-        <>
-          <View
-            style={{ height: 100 }}
-          />
+      <SafeAreaView  style={{ flex:1 }}>
 
-          <Button
-            title='LoadWebView'
-            onPress={() => {
-              // Linking.openURL("fromrntoios://hi")
-              // getCookies()
-              // const script = `
-              // //document.cookie = "newKey=Apple";
-              // console.log('helloFromWebView');
-              // console.log(document.cookie);
-              // `;
-              // webViewRef.current.injectJavaScript(script);
-              // webViewRef.current.reload();
-              // setloadWebView(true)
+        {/* <WebViewScreen /> */}
 
-              console.log('NativeModules', NativeModules.GetCookies.createLoginSession());
-
-            }}
-          />
-
-        </>
-        :
-        <>
+      <LearnFlexScreen/>
 
 
-
-          <WebView
-            ref={webViewRef}
-            source={{ uri: 'https://selfdeclaration.airtel.com' }}
-            style={{
-              marginTop: 20,
-              // height: 320,
-              // width: 200
-            }}
-            // onLoadEnd={getCookies}
-            // onLoad={setCookies}
-            javaScriptEnabled={true}
-            injectedJavaScript={debugging}
-            onMessage={onMessage}
-            sharedCookiesEnabled={true}
-
-          />
-          <Button
-            title='Move To iOS Screen !'
-            onPress={() => {
-              // Linking.openURL("fromrntoios://hi")
-              // getCookies()
-              const script = `
-          //document.cookie = "newKey=Apple";
-          console.log('helloFromWebView');
-          console.log(document.cookie);
-          
-          `;
-
-              CookieManager.getAll()
-                .then((cookies) => {
-                  console.log('CookieManager.getAll =>', cookies);
-                });
-              webViewRef.current.injectJavaScript(script);
-              webViewRef.current.reload();
-
-            }}
-          />
-        </>
-
-      }
+      </SafeAreaView>
     </>
   );
 };
